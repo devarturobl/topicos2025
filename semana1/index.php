@@ -8,7 +8,7 @@
 <body>
     <h1>Hola este es el primer archivo de php</h1>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet voluptate, harum doloremque laborum vitae deleniti itaque modi qui eveniet cupiditate illo. Voluptatem at eaque quisquam, veniam dignissimos harum pariatur dolores?</p>
-
+    
     <form method="post" action="">
         <label for="num1">Número 1:</label>
         <input type="number" id="num1" name="a" required>
@@ -19,6 +19,9 @@
         <input type="submit" value="Sumar">
     </form>
 
+    <h2>Vinculo a la Clase 2</h2>
+    <a href="clase2.php">Ir a la Clase 2</a>
+    
     <?php
         //Declarar Variable Regla 1 Poner el signo de $ antes del nombre
         $saludo = "Hola Chicos esto es PHP";
