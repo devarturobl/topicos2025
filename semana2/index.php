@@ -28,5 +28,7 @@
            $query = mysqli_query($conexion, "INSERT INTO datos (nombre, edad, telefono) VALUES ('$name', '$age', '$phone')");
         }
     ?>
+
+    <h3>Modulo Despliegue de datos <a href="mostrar.php">Aqui</a></h3>
 </body>
 </html>
