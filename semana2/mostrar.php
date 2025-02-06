@@ -16,13 +16,16 @@
                     <th>Nombre</th>
                     <th>Edad</th>
                     <th>Teléfono</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 include 'conexion.php';
-                $query = "Select * from datos";
-                $resultado = mysqli_query($conexion,$query);
+                $query = "SELECT * FROM datos";
+                $resultado = mysqli_query($conexion, $query);
+                
                 if (mysqli_num_rows($resultado) > 0) {
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>";
@@ -30,15 +33,26 @@
                         echo "<td>" . $fila['nombre'] . "</td>";
                         echo "<td>" . $fila['edad'] . "</td>";
                         echo "<td>" . $fila['telefono'] . "</td>";
+                        echo "<td class='text-center'>
+                                <a href='editar.php?id=" . $fila['id'] . "' class='btn btn-warning btn-sm'>
+                                    <i class='bi bi-pencil-square'></i> Editar
+                                </a>
+                              </td>";
+                        echo "<td class='text-center'>
+                                <a href='eliminar.php?id=" . $fila['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\");'>
+                                    <i class='bi bi-trash'></i> Eliminar
+                                </a>
+                              </td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4' class='text-center'>No hay datos disponibles</td></tr>";
+                    echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </body>
 </html>
