@@ -16,7 +16,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $edad = $fila['edad'];
         $telefono = $fila['telefono'];
     } else {
-        echo "<script>alert('Registro no encontrado.'); window.location='mostrar.php';</script>";
+        //echo "<script>alert('Registro no encontrado.'); window.location='mostrar.php';</script>";
         exit();
     }
 } else {
@@ -26,17 +26,74 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 // Procesar la actualización cuando se envía el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre_nuevo = mysqli_real_escape_string($conexion, $_POST['nombre']);
-    $edad_nueva = (int) $_POST['edad'];
-    $telefono_nuevo = mysqli_real_escape_string($conexion, $_POST['telefono']);
+    $name = $_POST['nombre'];
+    $age = $_POST['edad'];
+    $phone = $_POST['tel'];
 
     // Actualizar el registro
-    $query_update = "UPDATE datos SET nombre='$nombre_nuevo', edad=$edad_nueva, telefono='$telefono_nuevo' WHERE id=$id";
+    $query_update = "UPDATE datos SET nombre='$name', edad=$age, telefono='$phone' WHERE id=$id";
 
     if (mysqli_query($conexion, $query_update)) {
-        echo "<script>alert('Registro actualizado correctamente.'); window.location='index.php';</script>";
+echo '
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">¡Éxito!</h5>
+            </div>
+            <div class="modal-body">
+                <p>Registro actualizado correctamente.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="redirectBtn" class="btn btn-success">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Esperar a que el DOM cargue completamente
+    document.addEventListener("DOMContentLoaded", function() {
+        var alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
+        alertModal.show();
+
+        // Redirigir al cerrar el modal
+        document.getElementById("redirectBtn").addEventListener("click", function() {
+            window.location.href = "mostrar.php";
+        });
+    });
+</script>
+';
     } else {
-        echo "<script>alert('Error al actualizar.');</script>";
+        echo '
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title">¡Error!</h5>
+            </div>
+            <div class="modal-body">
+                <p>Error al Actualizar Registro. Entrada no Valida.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="redirectBtn" class="btn btn-danger">Terminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Esperar a que el DOM cargue completamente
+    document.addEventListener("DOMContentLoaded", function() {
+        var alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
+        alertModal.show();
+
+        // Redirigir al cerrar el modal
+        document.getElementById("redirectBtn").addEventListener("click", function() {
+            window.location.href = "index.php";
+        });
+    });
+</script>';
     }
 }
 ?>
@@ -47,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Editar Registro</title>
 </head>
 <body class="container mt-4">
@@ -62,11 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="mb-3">
             <label class="form-label">Teléfono:</label>
-            <input type="text" name="telefono" class="form-control" value="<?php echo htmlspecialchars($telefono); ?>" required>
+            <input type="text" name="tel" class="form-control" value="<?php echo htmlspecialchars($telefono); ?>" required>
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-success">Actualizar</button>
-            <a href="index.php" class="btn btn-secondary">Cancelar</a>
+            <a href="mostrar.php" class="btn btn-secondary">Cancelar</a>
         </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

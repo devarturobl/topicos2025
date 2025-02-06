@@ -21,11 +21,12 @@
         Include 'conexion.php';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['nombre'];
+           $name = $_POST['nombre'];
            $age = $_POST['edad'];
            $phone = $_POST['tel'];
            //Metodo Insert
-           $query = mysqli_query($conexion, "INSERT INTO datos (nombre, edad, telefono) VALUES ('$name', '$age', '$phone')");
+           $query_insert = "INSERT INTO datos (nombre, edad, telefono) VALUES ('$name', '$age', '$phone')";
+           mysqli_query($conexion, $query_insert);
         }
     ?>
 
