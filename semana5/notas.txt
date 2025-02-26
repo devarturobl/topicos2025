@@ -1,0 +1,9 @@
+Notas FTP
+usuario: alumno@paracticastec.online
+password: subirArchivos2025
+
+Servidor FTP
+Manual Settings
+FTP Username: alumno@practicastec.online
+FTP server: ftp.practicastec.online
+FTP & explicit FTPS port:  21
