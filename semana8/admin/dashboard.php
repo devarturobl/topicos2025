@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../access_denegate.php"); // Redirigir al inicio de sesión si no está autenticado
+    exit();
+}
+
+$nombre_usuario = $_SESSION['usuario_nombre'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

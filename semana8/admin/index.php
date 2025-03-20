@@ -11,7 +11,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $sql = "SELECT email, password FROM usuarios WHERE email = '$email'";
+        $sql = "SELECT email, password FROM usuarios WHERE email = '$email' and rol = 'admin'";
         $resultado = mysqli_query($con, $sql);
     
         if (mysqli_num_rows($resultado)) {
@@ -34,7 +34,17 @@
                       </script>";
             }
         } else {
-            $error = "El usuario no existe.";
+            echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                      <script>
+                          document.addEventListener('DOMContentLoaded', function() {
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Error',
+                                  text: 'El Usuario no Administrador',
+                                  confirmButtonColor: '#800020'
+                              });
+                          });
+                      </script>";
         }
     }
 ?>
