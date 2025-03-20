@@ -1,0 +1,15 @@
+Notas FTP
+usuario: alumno@paracticastec.online
+password: subirArchivos2025
+
+Servidor FTP
+Manual Settings
+FTP Username: alumno@practicastec.online
+FTP server: ftp.practicastec.online
+FTP & explicit FTPS port:  21
+
+
+Query para crear tablas
+CREATE TABLE `practi10_sistema`.`demo` (`id` BIGINT NOT NULL AUTO_INCREMENT , `dato` VARCHAR(200) NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;
+
+CREATE TABLE `practi10_sistema`.`usuarios` (`id` BIGINT NOT NULL AUTO_INCREMENT , `usuario` VARCHAR(200) NOT NULL , `clave` VARCHAR(200) NOT NULL ,PRIMARY KEY (`id`)) ENGINE = MyISAM;

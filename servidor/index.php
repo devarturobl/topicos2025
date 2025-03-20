@@ -64,6 +64,8 @@
                     $dato = $_POST['dato'];
                     $query = "INSERT INTO demo (dato) VALUES ('$dato')";
                     mysqli_query($conexion, $query);
+                }else{
+                    
                 }
                 ?>
             </div>
