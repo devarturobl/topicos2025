@@ -26,6 +26,49 @@
             background-color: #5a0015;
             border-color: #5a0015;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 500px;
+            color: black; /* Letras negras */
+            text-align: left; /* Contenido alineado a la izquierda */
+        }
+        .close {
+            color: red;
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .btn {
+            background-color: #343a40; /* Gris oscuro */
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #23272b; /* Gris más oscuro al pasar el cursor */
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
@@ -45,9 +88,47 @@
                 <button type="submit" class="btn btn-primary w-100">Ingresar</button>
             </form>
             <div class="text-center mt-3">
-                <a href="register.php" class="text-decoration-none">¿No tienes una cuenta? Regístrate aquí</a>
+                <button class="btn" onclick="openModal()">Recuperar Contraseña</button>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">Cerrar Ventana</span>
+            <h2>Recuperar Contraseña</h2>
+            <form id="recoveryForm">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" required>
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="emailModal" required>
+                <button type="submit" class="btn mt-3">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        document.getElementById("recoveryForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var username = encodeURIComponent(document.getElementById("username").value);
+            var email = encodeURIComponent(document.getElementById("emailModal").value);
+            
+            var mailtoLink = "mailto:arturobl00@msn.com?subject=Olvidé%20mi%20contraseña&body=Ayúdenme%20a%20recuperar%20mi%20contraseña.%20Mi%20usuario%20es%20" + username + "%20y%20el%20email%20" + email;
+            
+            window.location.href = mailtoLink;
+            
+            closeModal();
+        });
+    </script>
 </body>
 </html>
