@@ -70,12 +70,12 @@ $email_usuario = $_SESSION['usuario_email'];
                 <div id="menu" class="collapse d-md-block">
                     <ul class="nav flex-column">
                     <li class="nav-item">
-                            <a class="nav-link active" href="#" data-section="inico">
+                            <a class="nav-link active" href="../admin/dashboard.php" data-section="inico">
                                 <i class="bi bi-house-fill"></i> Inicio
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="../admin/maestros.php" data-section="maestros">
+                            <a class="nav-link active" href="#" data-section="maestros">
                                 <i class="bi bi-person-fill"></i> Maestros
                             </a>
                         </li>
@@ -90,9 +90,68 @@ $email_usuario = $_SESSION['usuario_email'];
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="main-content">
                 <!-- Contenido dinámico -->
-                 <h1>Bienvenido Administrador</h1>
+                 <h1>CRUD Maestros</h1>
                 <p>Usuario: <?php echo $email_usuario; ?></p>
                 <p>Este es el panel de control del administrador.</p>
+                
+                <!-- Botón para abrir el modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarMaestro">
+    Añadir Maestro
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAgregarMaestro" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Añadir Maestro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarMaestro">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+                <div id="mensaje"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AJAX para enviar el formulario -->
+<script>
+document.getElementById('formAgregarMaestro').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var formData = new FormData(this);
+
+    fetch('insertar_maestro.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('mensaje').innerHTML = data;
+        document.getElementById('formAgregarMaestro').reset();
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
             </main>
         </div>
     </div>
